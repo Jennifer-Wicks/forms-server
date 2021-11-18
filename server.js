@@ -38,18 +38,24 @@ transporter.verify(function (error, success) {
 
 app.post("/customer", (req, res) => {
   let form = new multiparty.Form();
-  // console.log("form", form)
   let data = {};
   form.parse(req, function (err, fields) {
     console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
-    // console.log("data", data);
+    // console.log("data", data);  
+    console.log("arr", data.arriveday1)
+    function myFunction() {
+      var x = data.arriveday1.split('-')
+      let a = x[2] + '/' + x[1] + '/' + x[0]
+      data.arriveday1 = a
+    }
+    console.log("arr", data.arriveday1)
     const mail = {
       from: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
-      subject: `client ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `<p><strong>Name:</strong> ${data.name}</p> 
         <p><strong>Surname:</strong> ${data.surname}</p>
         <p><strong>Nationality:</strong> ${data.nationality}</p>
@@ -64,8 +70,9 @@ app.post("/customer", (req, res) => {
         <p><strong>Arriveday 1:</strong> ${data.arriveday1}</p>
         <p><strong>Departday 1:</strong> ${data.departday1}</p>
         <p><strong>Comments:</strong> ${data.comments}</p>
-        <p><strong>News letter:</strong> ${data.newsletter}</p>`,
+        <p><strong>News letter:</strong> ${data.newsletter !== undefined ? data.newsletter : "No newsletter"}</p>`,
     };
+
     transporter.sendMail(mail, (err, data) => {
       if (err) {
         console.log(err);
@@ -78,10 +85,10 @@ app.post("/customer", (req, res) => {
 });
 
 app.post("/supplier", (req, res) => {
-  let formS = new multiparty.Form();
+  let form = new multiparty.Form();
   // console.log("formS", formS)
   let data = {};
-  formS.parse(req, function (err, fields) {
+  form.parse(req, function (err, fields) {
     console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
@@ -89,9 +96,9 @@ app.post("/supplier", (req, res) => {
     // console.log("data", data);
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
-      subject: `Form Success ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      subject: `Form Success ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
       html: `
-        <h3>Dear Oryx</h3>
+  < h3 > Dear Oryx</h3 >
         <p>Please make the following Reservation for me: <strong style="color: red">- 1 Booking</strong></p>
         <p>&nbsp;</p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 
@@ -128,24 +135,19 @@ app.post("/formsuccess", (req, res) => {
       data[property] = fields[property].toString();
     });
     // console.log("data", data);
+
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
       subject: `Supplier ${data.arriveday1} ${data.resort1} - Reservation request received`,
       html: `
-      <h1>Namibia Wildlife Resorts <i style="font-size: 15px; text-align: center;">by Madbookings</i></h1>
       <h2>Accommodation in Namibia's National Parks - site run by an NWR booking agent Madbookings</h2>
       <h1>Your Request has been Submitted</h1>
-      <p><b><i>Thankyou for your request. Please note a deposit payment is required immediately to confirm all
-      reservations.</i></b></p>
+      <p><b><i>Thankyou for your request. Please note bookings are not confirmed until a deposit has been paid.</i></b></p>
       <h3>What will happen now?</h3>
-      <p>You will receive an automatic email, should you wish to add to your reservation please respond to this email
-      with your full itinerary and requests rather than send a new booking enquiry. This will help us provide a
-      better service to you our valued guest.</p>
-      <p>Your request will be assigned one of our dedicated team members who will make a reservation for you based on
-      availability and revert back to you shortly to confirm the cost, and payment procedure so you can confirm
-      your reservation.Once your payment has been received our admin team will continue to make sure you are
-      reminded when further payments are due, and send you your e-voucher which must be presented at
-      receptionensuring a smooth check-in process.</p>
+      <p>Your request has been assigned to one of our dedicated team members who will make a reservation for you 
+        based on availability and revert back to you shortly with the payment procedure so you can confirm your 
+        reservation.
+      </p>
       <p>Your Travel Consultant will be happy to assist you with any queries you may have about your trip to Namibia.</p>
       <p>Regards<br><br>The Madbookings Team<br>(NWR, Namibia Booking Agent)</p>`,
     };
