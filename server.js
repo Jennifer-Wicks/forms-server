@@ -9,9 +9,11 @@ const PORT = process.env.PORT || 5000;
 // instantiate an express app
 const app = express();
 
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 // cors
 app.use(cors());
 
@@ -44,18 +46,21 @@ app.post("/customer", (req, res) => {
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
-    // console.log("data", data);  
-    console.log("arr", data.arriveday1)
+    // console.log("data", data);
+    console.log("arr", data.arriveday1);
     function myFunction() {
-      var x = data.arriveday1.split('-')
-      let a = x[2] + '/' + x[1] + '/' + x[0]
-      data.arriveday1 = a
+      var x = data.arriveday1.split("-");
+      let a = x[2] + "/" + x[1] + "/" + x[0];
+      data.arriveday1 = a;
     }
-    console.log("arr", data.arriveday1)
+    myFunction();
+    console.log("arr", data.arriveday1);
     const mail = {
       from: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
-      subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      subject: `client ${data.book === undefined ? data.quote : data.book} ${
+        data.arriveday1
+      } ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `<p><strong>Name:</strong> ${data.name}</p> 
         <p><strong>Surname:</strong> ${data.surname}</p>
         <p><strong>Nationality:</strong> ${data.nationality}</p>
@@ -70,7 +75,9 @@ app.post("/customer", (req, res) => {
         <p><strong>Arriveday 1:</strong> ${data.arriveday1}</p>
         <p><strong>Departday 1:</strong> ${data.departday1}</p>
         <p><strong>Comments:</strong> ${data.comments}</p>
-        <p><strong>News letter:</strong> ${data.newsletter !== undefined ? data.newsletter : "No newsletter"}</p>`,
+        <p><strong>News letter:</strong> ${
+          data.newsletter !== undefined ? data.newsletter : "No newsletter"
+        }</p>`,
     };
 
     transporter.sendMail(mail, (err, data) => {
