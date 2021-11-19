@@ -1,23 +1,6 @@
 const form = document.getElementById("contact-form");
-
-// const SADCCountries = [
-//   "Angola",
-//   "Botswana",
-//   "Comoros",
-//   "Democratic Republic of Congo",
-//   "Eswatini",
-//   "Lesotho",
-//   "Madagascar",
-//   "Malawi",
-//   "Mauritius",
-//   "Mozambique",
-//   "Namibia",
-//   "Seychelles",
-//   "South Africa",
-//   "Tanzania",
-//   "Zambia",
-//   "Zimbabwe"
-// ]
+const formSucc = document.getElementById("contact-form");
+const formSup = document.getElementById("contact-form");
 
 function validateForm() {
   let x = document.forms["contact-form"]["email"].value;
@@ -31,29 +14,24 @@ function validateForm() {
 const formEvent = form.addEventListener("submit", (event) => {
   event.preventDefault();
   let mail = new FormData(form);
-  sendMail(mail);
+  let formsuccess = new FormData(formSucc);
+  let supplier = new FormData(formSup);
+  sendMail(mail, formsuccess, supplier);
 });
 
-const sendMail = (mail) => {
-  fetch("http://localhost:5000/customer", {
-    method: "post",
-    body: mail,
-  }).then((response) => {
-    return response.json();
+let arr = [
+  "http://localhost:5000/api/sendEmailCustomer/customer",
+  "http://localhost:5000/api/sendEmailCustomeSuccess/formsuccess",
+  "http://localhost:5000/api/sendEmailSupplier/supplier"
+];
+
+const sendMail = (mail, formsuccess, supplier) => {
+  let requests = arr.map(urls => {
+    fetch(urls, {
+      method: "post",
+      body: mail, formsuccess, supplier,
+    }).then((response) => {
+      return response.json();
+    });
   });
-};
-
-// function myFunction() {
-//   var x = document.getElementById("arriveday1").value.split('-');
-//   console.log("Date", x[2] + '/' + x[1] + '/' + x[0])
-// }
-
-// const bookQuote = "";
-
-// const onClick = function () {
-//   let x = this.id
-//   bookQuote = x
-// }
-// document.getElementById('book').onclick = onClick;
-// document.getElementById('quote').onclick = onClick;
-// console.log("bookquote", bookQuote)
+}
