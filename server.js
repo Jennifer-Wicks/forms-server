@@ -45,13 +45,6 @@ app.post("/customer", (req, res) => {
       data[property] = fields[property].toString();
     });
     // console.log("data", data);  
-    console.log("arr", data.arriveday1)
-    function myFunction() {
-      var x = data.arriveday1.split('-')
-      let a = x[2] + '/' + x[1] + '/' + x[0]
-      data.arriveday1 = a
-    }
-    console.log("arr", data.arriveday1)
     const mail = {
       from: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
