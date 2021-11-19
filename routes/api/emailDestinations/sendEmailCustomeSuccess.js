@@ -34,7 +34,7 @@ router.post("/formsuccess", (req, res) => {
   // console.log("formSucc", formSucc)
   let data = {};
   formSucc.parse(req, function (err, fields) {
-    console.log("fields", fields);
+    // console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });

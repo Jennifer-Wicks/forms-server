@@ -34,7 +34,7 @@ router.post("/supplier", (req, res) => {
   // console.log("formSup", formSup)
   let data = {};
   formSup.parse(req, function (err, fields) {
-    console.log("fields", fields);
+    // console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
