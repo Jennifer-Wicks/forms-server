@@ -1,5 +1,6 @@
 const form = document.getElementById("contact-form");
 const formSucc = document.getElementById("contact-form");
+const formBook = document.getElementById("contact-form");
 const formSup = document.getElementById("contact-form");
 
 function validateForm() {
@@ -14,22 +15,24 @@ function validateForm() {
 const formEvent = form.addEventListener("submit", (event) => {
   event.preventDefault();
   let mail = new FormData(form);
-  let formsuccess = new FormData(formSucc);
+  let formsuccessQuote = new FormData(formSucc);
+  let formsuccessBook = new FormData(formBook);
   let supplier = new FormData(formSup);
-  sendMail(mail, formsuccess, supplier);
+  sendMail(mail, formsuccessQuote, formsuccessBook, supplier);
 });
 
 let arr = [
   "http://localhost:5000/api/sendEmailCustomer/customer",
-  "http://localhost:5000/api/sendEmailCustomeSuccess/formsuccess",
+  "http://localhost:5000/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
+  "http://localhost:5000/api/sendEmailCustomeSuccessBook/formsuccessBook",
   "http://localhost:5000/api/sendEmailSupplier/supplier"
 ];
 
-const sendMail = (mail, formsuccess, supplier) => {
+const sendMail = (mail, formsuccessQuote, formsuccessBook, supplier) => {
   let requests = arr.map(urls => {
     fetch(urls, {
       method: "post",
-      body: mail, formsuccess, supplier,
+      body: mail, formsuccessQuote, formsuccessBook, supplier,
     }).then((response) => {
       return response.json();
     });

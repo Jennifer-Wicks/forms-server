@@ -29,7 +29,7 @@ transporter.verify(function (error, success) {
 });
 
 //Send customer a success email
-router.post("/formsuccess", (req, res) => {
+router.post("/formsuccessQuote", (req, res) => {
   let formSucc = new multiparty.Form();
   // console.log("formSucc", formSucc)
   let data = {};
@@ -43,14 +43,11 @@ router.post("/formsuccess", (req, res) => {
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
       subject: `formsuccess ${data.arriveday1} ${data.resort1} - Reservation request received`,
-      html: `<h1>Your Request has been Submitted</h1>
-      <p><b><i>Thankyou for your request. Please note bookings are not confirmed until a deposit has been paid.</i></b></p>
+      html: `<h1>Your request for an accommodation quote has been received</h1>
+      <p><b><i>Thank you for your request regarding the cost of accommodation in Namibia.</i></b></p>
       <h3>What will happen now?</h3>
-      <p>Your request has been assigned to one of our dedicated team members who will make a reservation for you 
-        based on availability and revert back to you shortly with the payment procedure so you can confirm your 
-        reservation.
-      </p>
-      <p>Your Travel Consultant will be happy to assist you with any queries you may have about your trip to Namibia.</p>
+      <p>We will reply to you shortly with a quote based on your request, should you wish to add to 
+        or amend the details of your request please reply to this email.</p>
       <p>Regards<br><br>The Madbookings Team<br>(NWR, Namibia Booking Agent)</p>`,
     };
     transporter.sendMail(supplier, (err, data) => {

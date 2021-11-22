@@ -52,7 +52,7 @@ router.post("/supplier", (req, res) => {
       to: process.env.TOEMAIL, // receiver email,
       subject: `Supplier ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
       html: `<h3> Dear Oryx</h3 >
-        <p>Please make the following Reservation for me:</p>
+        <p>Please make the following Reservation for me: <strong style="color: red;">1 Booking</strong></p>
         <p>&nbsp;</p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 
         <p>&nbsp;</p>        
