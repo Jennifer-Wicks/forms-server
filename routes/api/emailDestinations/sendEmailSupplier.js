@@ -39,31 +39,37 @@ router.post("/supplier", (req, res) => {
       data[property] = fields[property].toString();
     });
     // console.log("data", data);
-    function changeDateFormat() {
+    var strName, strValue;
+    var newData = []
+
+    function insertInfo() {
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
       let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
       let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
+
+
+      for (strName in data) {
+        strValue = data[strName]
+        if (strName.slice(0, 4) === "reso"
+          || strName.slice(0, 4) === "acco"
+          || strName.slice(0, 4) === "arri"
+          || strName.slice(0, 4) === "depa") {
+          newData.push(`<p><strong>${strName.slice(0, -1)}:</strong> ${strValue}</p>`);
+        }
+      }
     }
-    changeDateFormat();
+    insertInfo();
+
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
       subject: `Supplier ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
       html: `<h3> Dear Oryx</h3 >
         <p>Please make the following reservation for me: <strong style="color: red;">1 Booking</strong></p>
-        <p>&nbsp;</p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 
-        <p>&nbsp;</p>        
-        <p><strong>Lodge Name:</strong> ${data.resort1}</P>
-        <p><strong>Arrive:</strong> ${data.arriveday1}</p>
-        <p><strong>Depart:</strong> ${data.departday1}</p>
-        <p><strong>Adults:</strong> ${data.adults}</p>
-        <p><strong>Children (under 6 yrs):</strong> ${data.childnopay} - No Charge</p>
-        <p><strong>Children (age 6 -12 yrs):</strong> ${data.childhalfprice} - Paying 50%</p>
-        <p><strong>Type of Accommodation: </strong> ${data.accomtype1}</p>
-        <p>&nbsp;</p>
+       ${newData.join(" ")}
         <p>I look forward to your confirmation.</p>
         <p>Rep 3</p>
         <p>Madbookings</p>`,

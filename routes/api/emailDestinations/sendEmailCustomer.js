@@ -37,7 +37,6 @@ router.post("/customer", (req, res) => {
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
-    // console.log("data", data);
 
     var strName, strValue;
     var newData = []
@@ -52,31 +51,17 @@ router.post("/customer", (req, res) => {
 
       for (strName in data) {
         strValue = data[strName]
-        newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`)
+        newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }
     }
     insertInfo();
 
-    // console.log("newData 60", newData)
-
-    // function changeDateFormat() {
-    //   var wrongDateArr = data.arriveday1.split("-");
-    //   var wrongDateDep = data.departday1.split("-");
-    //   let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
-    //   let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
-    //   data.arriveday1 = changedDateArr;
-    //   data.departday1 = changedDateDep;
-    //   console.log(data.arriveday1)
-    // }
-    // changeDateFormat();
-
-    const emailData = newData.map(data => data)
     const mail = {
       from: `${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `${emailData}`
+      html: `${newData.join(' ')}`
     };
 
     transporter.sendMail(mail, (err, data) => {
@@ -91,3 +76,5 @@ router.post("/customer", (req, res) => {
 });
 
 module.exports = router;
+
+
