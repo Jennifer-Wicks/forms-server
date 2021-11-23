@@ -38,7 +38,7 @@ router.post("/supplier", (req, res) => {
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
-    // console.log("data", data);
+    console.log("data", data);
     var strName, strValue;
     var newData = []
 
@@ -50,14 +50,39 @@ router.post("/supplier", (req, res) => {
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
 
-
       for (strName in data) {
         strValue = data[strName]
         if (strName.slice(0, 4) === "reso"
           || strName.slice(0, 4) === "acco"
           || strName.slice(0, 4) === "arri"
-          || strName.slice(0, 4) === "depa") {
-          newData.push(`<p><strong>${strName.slice(0, -1)}:</strong> ${strValue}</p>`);
+          || strName.slice(0, 4) === "depa"
+          || strName.slice(0, 4) === "adul"
+          || strName.slice(0, 7) === "childno"
+          || strName.slice(0, 7) === "childha"
+        ) {
+          if (strName.slice(0, 4) === "reso") {
+            strName = "Resort"
+            newData.push(`<p>&nbsp</p>`);
+          }
+          if (strName.slice(0, 4) === "acco") {
+            strName = "Accommodation Type"
+          }
+          if (strName.slice(0, 4) === "arri") {
+            strName = "Arrivale date"
+          }
+          if (strName.slice(0, 4) === "depa") {
+            strName = "Departure Date"
+          }
+          if (strName.slice(0, 4) === "adul") {
+            strName = "Adults"
+          }
+          if (strName.slice(0, 7) === "childno") {
+            strName = "Child (0 - 5) - No Charge"
+          }
+          if (strName.slice(0, 7) === "childha") {
+            strName = "Child (6 - 12) - Paying 50%"
+          }
+          newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
         }
       }
     }
@@ -65,7 +90,7 @@ router.post("/supplier", (req, res) => {
 
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
-      subject: `Supplier ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
+      subject: `New Booking: ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
       html: `<h3> Dear Oryx</h3 >
         <p>Please make the following reservation for me: <strong style="color: red;">1 Booking</strong></p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 

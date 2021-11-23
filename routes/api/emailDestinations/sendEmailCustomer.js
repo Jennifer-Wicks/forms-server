@@ -51,6 +51,15 @@ router.post("/customer", (req, res) => {
 
       for (strName in data) {
         strValue = data[strName]
+        if (strName.slice(0, 4) === "adul") {
+          newData.push(`<p>&nbsp</p>`);
+        }
+        if (strName.slice(0, 4) === "reso") {
+          newData.push(`<p>&nbsp</p>`);
+        }
+        if (strName.slice(0, 4) === "comm") {
+          newData.push(`<p>&nbsp</p>`);
+        }
         newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }
     }
@@ -60,7 +69,7 @@ router.post("/customer", (req, res) => {
       from: `${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
-      subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `${newData.join(' ')}`
     };
 
