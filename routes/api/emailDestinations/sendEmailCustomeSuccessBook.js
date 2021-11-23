@@ -20,13 +20,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // verify connection configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to take our messages");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Server is ready to take our messages");
+//   }
+// });
 
 //Send customer a success email
 router.post("/formsuccessBook", (req, res) => {
@@ -42,7 +42,7 @@ router.post("/formsuccessBook", (req, res) => {
 
     const supplier = {
       to: process.env.TOEMAIL, // receiver email,
-      subject: `formsuccessBook ${data.arriveday1} ${data.resort1} - Reservation request received`,
+      subject: `formsuccessBook ${data.resort1} - Reservation request received`,
       html: `<h1>Your accommodation request has been received</h1>
       <p><b><i>Thank you for your request regarding accommodation in Namibia. Please note bookings 
         are not confirmed until a deposit has been paid.</i></b></p>

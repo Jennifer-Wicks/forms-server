@@ -20,13 +20,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // verify connection configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to take our messages");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Server is ready to take our messages");
+//   }
+// });
 
 //Send customer booking form to MB
 router.post("/customer", (req, res) => {
@@ -41,32 +41,42 @@ router.post("/customer", (req, res) => {
 
     var strName, strValue;
     var newData = []
-    function insertInfo() {
-      for (strName in data) {
-        strValue = data[strName]
-        newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`)
-      }
-    }
-    insertInfo()
-    console.log("campdata", newData)
 
-    function changeDateFormat() {
+    function insertInfo() {
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
       let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
       let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
-    }
-    changeDateFormat();
 
+      for (strName in data) {
+        strValue = data[strName]
+        newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`)
+      }
+    }
+    insertInfo();
+
+    // console.log("newData 60", newData)
+
+    // function changeDateFormat() {
+    //   var wrongDateArr = data.arriveday1.split("-");
+    //   var wrongDateDep = data.departday1.split("-");
+    //   let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
+    //   let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
+    //   data.arriveday1 = changedDateArr;
+    //   data.departday1 = changedDateDep;
+    //   console.log(data.arriveday1)
+    // }
+    // changeDateFormat();
+
+    const emailData = newData.map(data => data)
     const mail = {
       from: `${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
-      subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1
-        } ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `${newData.map(data => data)}`
+      subject: `client ${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      html: `${emailData}`
     };
 
     transporter.sendMail(mail, (err, data) => {

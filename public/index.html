@@ -6,21 +6,22 @@
       Ai Ais Hotsprings Resort Booking Form Fish River Canyon Namibia
       Namibia Wildlife Resorts NWR
     </title>
-    <meta name="keywords"
-      content="Ai Ais Hotsprings Resort prices, Ai Ais Hotsprings Resort NWR, Ai
+    <meta name="keywords" content="Ai Ais Hotsprings Resort prices, Ai Ais
+      Hotsprings Resort NWR, Ai
       Ais Hotsprings Resort Namibia, Ai Ais Hotsprings Resort rates">
-    <meta name="description"
-      content="Rates and Prices for Ai Ais Hotsprings Resort Fish River Canyon
+    <meta name="description" content="Rates and Prices for Ai Ais Hotsprings
+      Resort Fish River Canyon
       Namibia. Seasons and fees for accommodation at Ai Ais Hotsprings Resort
       Fish River Canyon Namibia Namibia">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link rel="stylesheet" href="/assets/css/main.css" /> -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
 
   <body>
     <noscript>
-      <link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+      <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -85,14 +86,11 @@
       <div id="main">
         <div class="inner">
           <form id="contact-form">
-            <!-- <div>
-              <input type="hidden" name="required_vars" id="required_vars"
-                value="email, emailcheck">
-            </div> -->
             <table>
               <tr>
                 <td>
-                  <strong>Your First Name(s):</strong> </td>
+                  <strong>Your First Name(s):</strong>
+                </td>
                 <td>
                   <input type="text" name="name" id="name" value="">
                 </td>
@@ -125,7 +123,8 @@
               </tr>
               <tr>
                 <td>
-                  <strong>Email Address:</strong> (*required field)</td>
+                  <strong>Email Address:</strong> (*required field)
+                </td>
                 <td>
                   <input type="text" name="email" id="email" value="" required>
                 </td>
@@ -232,26 +231,18 @@
               </tr>
             </table>
             <!--Insert camp selection-->
-            <p id="add_extra_camp"></p>
-            <br />
-            <p class="button" onClick="addToCounter(), addACamp()">
-              click here to add a camp
-            </p>
             <table>
               <tr>
-                <div class="col-6 col-12-small">
-                  <input type="checkbox" name="book" id="book"
-                    value="Please book">
-                  <label for="book">Please make a booking</label>
-                </div>
+                <td>
+                  <p id="add_extra_camp"></p>
+                  <br />
+                  <p class="button" onClick="addToCounter(), addACamp()">
+                    click here to add a camp
+                  </p>
+                </td>
               </tr>
-              <tr>
-                <div class="col-6 col-12-small">
-                  <input type="checkbox" name="quote" id="quote"
-                    value="Please quote">
-                  <label for="quote">Please send me a quote</label>
-                </div>
-              </tr>
+            </table>
+            <table>
               <tr>
                 <td><strong>Comments:</strong> <BR>
                   <div class="col-12">
@@ -269,6 +260,23 @@
                       </label>
                     </div>
                   </div>
+                </td>
+              </tr>
+            </table>
+            <table>
+              <h3>Are you making a booking or requesting a quote?</h3>
+              <tr>
+                <td>
+                  <input type="checkbox" name="book" id="book"
+                    value="Please book">
+                  <label for="book">Please make a booking</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="quote" id="quote"
+                    value="Please quote">
+                  <label for="quote">Please send me a quote</label>
                 </td>
               </tr>
             </table>
@@ -290,11 +298,11 @@
     </div>
 
     <!-- Scripts -->
-    <!-- <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/browser.min.js"></script>
     <script src="/assets/js/breakpoints.min.js"></script>
     <script src="/assets/js/util.js"></script>
-    <script src="/assets/js/main.js"></script> -->
+    <script src="/assets/js/main.js"></script>
     <script src="./bookingFormAddACamp.js"></script>
     <script src="./customerForm.js"></script>
   </body>

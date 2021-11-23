@@ -13,13 +13,11 @@ app.use(
     extended: true,
   })
 );
-
 // cors
 app.use(cors());
 // API Routes
 app.use('/api', apiRoute);
 
-/*************************************************/
 // Express server listening...
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);

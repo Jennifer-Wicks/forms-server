@@ -20,13 +20,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // verify connection configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to take our messages");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Server is ready to take our messages");
+//   }
+// });
 
 //Send customer booking form to MB
 router.post("/supplier", (req, res) => {
@@ -52,7 +52,7 @@ router.post("/supplier", (req, res) => {
       to: process.env.TOEMAIL, // receiver email,
       subject: `Supplier ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname} \)`,
       html: `<h3> Dear Oryx</h3 >
-        <p>Please make the following Reservation for me: <strong style="color: red;">1 Booking</strong></p>
+        <p>Please make the following reservation for me: <strong style="color: red;">1 Booking</strong></p>
         <p>&nbsp;</p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 
         <p>&nbsp;</p>        
