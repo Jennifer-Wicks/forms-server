@@ -52,13 +52,13 @@ router.post("/customer", (req, res) => {
       for (strName in data) {
         strValue = data[strName]
         if (strName.slice(0, 4) === "adul") {
-          newData.push(`<p>&nbsp</p>`);
+          newData.push(`<p>&nbsp;</p>`);
         }
         if (strName.slice(0, 4) === "reso") {
-          newData.push(`<p>&nbsp</p>`);
+          newData.push(`<p>&nbsp;</p>`);
         }
         if (strName.slice(0, 4) === "comm") {
-          newData.push(`<p>&nbsp</p>`);
+          newData.push(`<p>&nbsp;</p>`);
         }
         newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }

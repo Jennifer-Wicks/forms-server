@@ -62,7 +62,7 @@ router.post("/supplier", (req, res) => {
         ) {
           if (strName.slice(0, 4) === "reso") {
             strName = "Resort"
-            newData.push(`<p>&nbsp</p>`);
+            newData.push(`<p>&nbsp;</p>`);
           }
           if (strName.slice(0, 4) === "acco") {
             strName = "Accommodation Type"
