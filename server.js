@@ -17,6 +17,12 @@ app.use(
 app.use(cors());
 // API Routes
 app.use('/api', apiRoute);
+app.use("/public", express.static(process.cwd() + "/public")); //make public static
+
+//Index page (static HTML)
+app.route("/").get(function (req, res) {
+  res.sendFile(process.cwd() + "/public/index.html");
+});
 
 // Express server listening...
 app.listen(PORT, () => {
