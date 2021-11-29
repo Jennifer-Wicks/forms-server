@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require('express');
 
 const router = express.Router();
@@ -16,8 +14,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     type: "login", //Default
-    user: "boneswvb@gmail.com", //process.env.EMAIL
-    pass: "Wwim1234" //process.env.PASS
+    user: "boneswvb@gmail.com", //process.env.EMAIL,
+    pass: "Wwim1234", //process.env.PASS,
   },
 });
 
