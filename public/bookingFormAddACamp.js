@@ -37,11 +37,6 @@ function addToCounter() {
   counter = counter + 1;
 }
 
-function reduceCounter() {
-  counter = counter - 1;
-  console.log(counter)
-}
-
 //Add a table
 var getForm = document.getElementById("add_extra_camp");
 
@@ -131,7 +126,7 @@ function addACamp() {
   createButton.setAttribute("type", "button");
   createButton.setAttribute("class", "btn btn-danger");
   table.appendChild(createButton)
-  createButton.setAttribute("onClick", "reduceCounter(), remove(this)");
+  createButton.setAttribute("onClick", "remove(this)");
 
   getForm.appendChild(table);
 }
