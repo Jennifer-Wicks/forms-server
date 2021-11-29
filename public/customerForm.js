@@ -34,13 +34,6 @@ const formEvent = form.addEventListener("submit", (event) => {
   sendMail(mail, formsuccessQuote, formsuccessBook, supplier);
 });
 
-// arr = [
-//   "http://localhost:5000/api/sendEmailCustomer/customer",
-//   "http://localhost:5000/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
-//   "http://localhost:5000/api/sendEmailCustomeSuccessBook/formsuccessBook",
-//   "http://localhost:5000/api/sendEmailSupplier/supplier"
-// ];
-
 const sendMail = (mail, formsuccessQuote, formsuccessBook, supplier) => {
   let requests = arr.map(urls => {
     fetch(urls, {
