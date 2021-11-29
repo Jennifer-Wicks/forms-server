@@ -1,4 +1,7 @@
+require("dotenv").config();
+
 const express = require('express');
+
 const router = express.Router();
 
 const sendEmailCustomerRoute = require('./emailDestinations/sendEmailCustomer');
