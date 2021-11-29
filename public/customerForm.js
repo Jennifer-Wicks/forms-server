@@ -17,14 +17,14 @@ const formEvent = form.addEventListener("submit", (event) => {
   var cb = document.getElementById('quote')
   cb.checked
     ? arr = [
-      "http://localhost:5000/api/sendEmailCustomer/customer",
-      "http://localhost:5000/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
-      "http://localhost:5000/api/sendEmailSupplier/supplier"
+      "mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
+      "mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
+      "mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
     ]
     : arr = [
-      "http://localhost:5000/api/sendEmailCustomer/customer",
-      "http://localhost:5000/api/sendEmailCustomeSuccessBook/formsuccessBook",
-      "http://localhost:5000/api/sendEmailSupplier/supplier"
+      "mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
+      "mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessBook/formsuccessBook",
+      "mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
     ];
   event.preventDefault();
   let mail = new FormData(form);
@@ -34,12 +34,12 @@ const formEvent = form.addEventListener("submit", (event) => {
   sendMail(mail, formsuccessQuote, formsuccessBook, supplier);
 });
 
-arr = [
-  "http://localhost:5000/api/sendEmailCustomer/customer",
-  "http://localhost:5000/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
-  "http://localhost:5000/api/sendEmailCustomeSuccessBook/formsuccessBook",
-  "http://localhost:5000/api/sendEmailSupplier/supplier"
-];
+// arr = [
+//   "http://localhost:5000/api/sendEmailCustomer/customer",
+//   "http://localhost:5000/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
+//   "http://localhost:5000/api/sendEmailCustomeSuccessBook/formsuccessBook",
+//   "http://localhost:5000/api/sendEmailSupplier/supplier"
+// ];
 
 const sendMail = (mail, formsuccessQuote, formsuccessBook, supplier) => {
   let requests = arr.map(urls => {
