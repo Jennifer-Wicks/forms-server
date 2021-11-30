@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     type: "login", //Default
-    user: "boneswvb@gmail.com", //process.env.EMAIL,
-    pass: "Wwim1234",//process.env.PASS,
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
   },
 });
 
@@ -68,7 +68,7 @@ router.post("/customer", (req, res) => {
     const mail = {
       from: `${data.email}`,
       replyTo: `${data.email}`,
-      to: "products@madbookings.com", //process.env.TOEMAIL, // receiver email,
+      to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `${newData.join(' ')}`
     };
