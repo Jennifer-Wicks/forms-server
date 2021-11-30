@@ -14,22 +14,10 @@ router.get('/customer', async function (req, res) {
 var transport = nodemailer.createTransport(smtpTransport({
   service: 'gmail',
   auth: {
-    user: "boneswvb@gmail.com", // process.env.EMAIL,
-    pass: "Wwim1234", // process.env.PASS,
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
   }
 }));
-
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   // host: 'smtp.gmail.com',
-//   // port: 465,
-//   // secure: true, // use SSL
-//   auth: {
-//     type: "login", //Default
-//     user: "boneswvb@gmail.com", // process.env.EMAIL,
-//     pass: "Wwim1234", // process.env.PASS,
-//   },
-// });
 
 // verify connection configuration
 // transporter.verify(function (error, success) {
@@ -78,11 +66,11 @@ router.post("/customer", (req, res) => {
     insertInfo();
 
     const mail = {
-      from: "boneswvb@gmail.com", // `${data.email}`,
-      replyTo: "products@madbookings.com", // `${data.email}`,
-      to: "products@madbookings.com", // process.env.TOEMAIL, // receiver email,
-      subject: "Heroku", //`${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `<p>Heroku</p>` // `${newData.join(' ')}`
+      from: `${data.email}`,
+      replyTo: `${data.email}`,
+      to: process.env.TOEMAIL, // receiver email,
+      subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      html: `${newData.join(' ')}`
     };
 
     transport.sendMail(mail, (err, data) => {
