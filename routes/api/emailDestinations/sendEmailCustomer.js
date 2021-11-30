@@ -11,9 +11,10 @@ router.get('/customer', async function (req, res) {
 });
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // use SSL
+  service: 'gmail',
+  // host: 'smtp.gmail.com',
+  // port: 465,
+  // secure: true, // use SSL
   auth: {
     type: "login", //Default
     user: "boneswvb@gmail.com", // process.env.EMAIL,
