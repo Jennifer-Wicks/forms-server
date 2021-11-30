@@ -5,22 +5,31 @@ const router = express.Router();
 
 const multiparty = require("multiparty");
 const nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
 
 router.get('/customer', async function (req, res) {
   res.json("Customer form")
 });
 
-const transporter = nodemailer.createTransport({
+var transport = nodemailer.createTransport(smtpTransport({
   service: 'gmail',
-  // host: 'smtp.gmail.com',
-  // port: 465,
-  // secure: true, // use SSL
   auth: {
-    type: "login", //Default
     user: "boneswvb@gmail.com", // process.env.EMAIL,
     pass: "Wwim1234", // process.env.PASS,
-  },
-});
+  }
+}));
+
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   // host: 'smtp.gmail.com',
+//   // port: 465,
+//   // secure: true, // use SSL
+//   auth: {
+//     type: "login", //Default
+//     user: "boneswvb@gmail.com", // process.env.EMAIL,
+//     pass: "Wwim1234", // process.env.PASS,
+//   },
+// });
 
 // verify connection configuration
 // transporter.verify(function (error, success) {
@@ -76,7 +85,7 @@ router.post("/customer", (req, res) => {
       html: `<p>Heroku</p>` // `${newData.join(' ')}`
     };
 
-    transporter.sendMail(mail, (err, data) => {
+    transport.sendMail(mail, (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).send("Something went wrong.");
