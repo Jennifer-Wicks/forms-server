@@ -68,7 +68,7 @@ router.post("/customer", (req, res) => {
     const mail = {
       from: `${data.email}`,
       replyTo: `${data.email}`,
-      to: process.env.TOEMAIL, // receiver email,
+      to: "products@madbookings.com", //process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `${newData.join(' ')}`
     };
