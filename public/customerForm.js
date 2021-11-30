@@ -18,13 +18,13 @@ const formEvent = form.addEventListener("submit", (event) => {
   cb.checked
     ? arr = [
       "https://mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
-      // "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
-      // "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
+      "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
+      "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
     ]
     : arr = [
       "https://mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
-      // "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessBook/formsuccessBook",
-      // "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
+      "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessBook/formsuccessBook",
+      "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
     ];
   event.preventDefault();
   let mail = new FormData(form);
