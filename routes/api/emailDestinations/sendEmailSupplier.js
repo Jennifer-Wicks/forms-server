@@ -9,24 +9,22 @@ router.get('/customer', async function (req, res) {
   res.json("Customer form")
 });
 
-const transporter = nodemailer.createTransport({
-  port: 465,
-  host: "smtp.gmail.com",
+var transport = nodemailer.createTransport(smtpTransport({
+  service: 'gmail',
   auth: {
-    type: "login", //Default
     user: process.env.EMAIL,
     pass: process.env.PASS,
-  },
-});
+  }
+}));
 
 // verify connection configuration
-// transporter.verify(function (error, success) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Server is ready to take our messages");
-//   }
-// });
+transport.verify(function (error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
 
 //Send customer booking form to MB
 router.post("/supplier", (req, res) => {
@@ -99,7 +97,7 @@ router.post("/supplier", (req, res) => {
         <p>Rep 3</p>
         <p>Madbookings</p>`,
     };
-    transporter.sendMail(supplier, (err, data) => {
+    transport.sendMail(supplier, (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).send("Something went wrong.");
