@@ -4,7 +4,7 @@ const router = express.Router();
 
 const multiparty = require("multiparty");
 const nodemailer = require("nodemailer");
-
+var smtpTransport = require('nodemailer-smtp-transport');
 
 router.get('/customer', async function (req, res) {
   res.json("Customer form")
