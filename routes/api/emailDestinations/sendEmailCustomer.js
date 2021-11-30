@@ -20,13 +20,13 @@ var transport = nodemailer.createTransport(smtpTransport({
 }));
 
 // verify connection configuration
-// transporter.verify(function (error, success) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Server is ready to take our messages");
-//   }
-// });
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
 
 //Send customer booking form to MB
 router.post("/customer", (req, res) => {
