@@ -12,7 +12,7 @@ router.get('/customer', async function (req, res) {
 
 const transporter = nodemailer.createTransport({
   //port: 465,
-  host: "smtp.gmail.com",
+  service: "smtp.gmail.com",
   auth: {
     type: "login", //Default
     user: process.env.EMAIL,
