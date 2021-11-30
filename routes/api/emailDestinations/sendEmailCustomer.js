@@ -10,23 +10,23 @@ router.get('/customer', async function (req, res) {
 });
 
 const transporter = nodemailer.createTransport({
-  port: 465,
+  //port: 465,
   host: "smtp.gmail.com",
   auth: {
     type: "login", //Default
-    user: process.env.EMAIL,
-    pass: process.env.PASS,
+    user: "boneswvb@gmail.com", //process.env.EMAIL,
+    pass: "Wwim1234",//process.env.PASS,
   },
 });
 
 // verify connection configuration
-// transporter.verify(function (error, success) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Server is ready to take our messages");
-//   }
-// });
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
 
 //Send customer booking form to MB
 router.post("/customer", (req, res) => {
