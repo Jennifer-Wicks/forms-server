@@ -74,11 +74,13 @@ router.post("/customer", (req, res) => {
       attachments: [
         {
           filename: '201040.pdf',
-          content: '201040'
+          content: '201040',
+          contentType: 'application/pdf'
         },
         {
           filename: 'kasane-location-map.gif',
-          content: 'kasane-location-map'
+          content: 'kasane-location-map',
+          contentType: 'image/gif'
         }
       ]
     };
