@@ -75,6 +75,10 @@ router.post("/customer", (req, res) => {
         {
           filename: '201040.pdf',
           content: '201040'
+        },
+        {
+          filename: 'kasane-location-map.gif',
+          content: 'kasane-location-map'
         }
       ]
     };
