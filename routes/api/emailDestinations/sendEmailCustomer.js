@@ -70,7 +70,13 @@ router.post("/customer", (req, res) => {
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `${newData.join(' ')}`
+      html: `${newData.join(' ')}`,
+      attachments: [
+        {
+          filename: '201040.pdf',
+          content: '201040'
+        }
+      ]
     };
 
     transport.sendMail(mail, (err, data) => {
