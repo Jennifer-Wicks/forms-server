@@ -80,7 +80,7 @@ router.post("/customer", (req, res) => {
         {
           filename: 'kasane-location-map.gif',
           content: 'kasane-location-map',
-          contentType: 'image/gif'
+          contentType: '/image.*/'
         }
       ]
     };
