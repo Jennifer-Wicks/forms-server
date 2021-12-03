@@ -19,13 +19,15 @@ var cb = document.getElementById('quote')
 const formEvent = form.addEventListener("submit", (event) => {
   cb.checked
     ? arr = [
-      // "http://localhost:5000/api/sendEmailCustomer/customer"
+      // "http://localhost:5000/api/sendEmailCustomer/customer",
+      // "http://localhost:5000/api/sendEmailSupplier/supplier"
       "https://mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
       // // to be used later "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessQuote/formsuccessQuote",
       "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"
     ]
     : arr = [
-      // "http://localhost:5000/api/sendEmailCustomer/customer"
+      // "http://localhost:5000/api/sendEmailCustomer/customer",
+      // "http://localhost:5000/api/sendEmailSupplier/supplier"
       "https://mad-email-server.herokuapp.com/api/sendEmailCustomer/customer",
       // // to be used later "https://mad-email-server.herokuapp.com/api/sendEmailCustomeSuccessBook/formsuccessBook",
       "https://mad-email-server.herokuapp.com/api/sendEmailSupplier/supplier"

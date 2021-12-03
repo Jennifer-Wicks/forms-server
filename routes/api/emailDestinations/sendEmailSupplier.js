@@ -94,8 +94,9 @@ router.post("/supplier", (req, res) => {
         <p>Please make the following reservation for me: <strong style="color: red;">1 Booking</strong></p>
         <p><strong>Reservation Name:</strong> ${data.name} ${data.surname}</p> 
        ${newData.join(" ")}
-       <p>$nbsp;</p>
+        <p>&nbsp;</p>
         <p>I look forward to your confirmation.</p>
+        <p>&nbsp;</p>
         <p>Rep 3</p>
         <p>Madbookings</p>`,
     };
