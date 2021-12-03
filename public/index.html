@@ -18,10 +18,13 @@
     <link rel="stylesheet" href="../public/main.css" />
   </head>
 
-  <body>
+  <body onload="GetUrl()">
     <noscript>
       <link rel="stylesheet" href="../public/noscript.css" />
     </noscript>
+    <a href="ai-ais-accommodation.html">ai-ais-accommodation.html</a><br />
+    <a href="boplaas.html">boplaas.html</a><br />
+    <a href="index.html">index.html</a><br /><br />
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -177,7 +180,7 @@
                   <p><strong>Booking 1: </strong>
                     <strong>Which Resort Would you like to travel to?<br></strong>
                     <select id="resort1" name="resort1">
-                      <option value="Ai Ais">---Select A Resort---</option>
+                      <option id="firstCamp" value=""></option>
                       <option value="Ai Ais">Ai Ais - Fish River Canyon</option>
                       <option value="Boplaas">Boplaas</option>
                       <option value="Daan Viljoen">Daan Viljoen</option>
@@ -283,6 +286,7 @@
                 </td>
               </tr>
             </table>
+            <!-- <input type="file" name="uploadFile" id="input" multiple> -->
             <div class="row aln-center">
               <input class="button" type="submit">
             </div>

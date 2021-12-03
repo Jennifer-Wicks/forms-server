@@ -1,5 +1,4 @@
 const express = require('express');
-// require('dotenv').config();
 
 const router = express.Router();
 
@@ -16,7 +15,7 @@ var transport = nodemailer.createTransport(smtpTransport({
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
-  }
+  },
 }));
 
 // verify connection configuration
@@ -32,11 +31,16 @@ transport.verify(function (error, success) {
 router.post("/customer", (req, res) => {
   let form = new multiparty.Form();
   let data = {};
-  form.parse(req, function (err, fields) {
+  // let fileData = [];
+  form.parse(req, function (err, fields) { //fileList
     // console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
+      // console.log("fileList", fileList.uploadFile);
+
+      // fileData.push(fileList.uploadFile);
     });
+    // console.log("fileData", fileData);
 
     var strName, strValue;
     var newData = []
@@ -66,23 +70,24 @@ router.post("/customer", (req, res) => {
     insertInfo();
 
     const mail = {
-      from: `${data.email}`,
+      from: `Madbookings ${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `${newData.join(' ')}`,
-      attachments: [
-        {
-          filename: '201040.pdf',
-          content: '201040',
-          contentType: 'application/pdf'
-        },
-        {
-          filename: 'kasane-location-map.gif',
-          content: 'kasane-location-map',
-          contentType: '/image.*/'
-        }
-      ]
+      // <br />Embedded image: <img src="./public/cid:kasane-location-map.gif"/> <br />Embedded image: <img src="cid:./public/201040.pdf"/>`,
+      // attachments: [
+      //   {
+      //     filename: 'image.png',
+      //     path: './public/kasane-location-map.gif',
+      //     cid: 'kasane-location-map.gif' //same cid value as in the html img src
+      //   },
+      //   {
+      //     filename: '201040.pdf',
+      //     path: './public/201040.pdf',
+      //     cid: 'unique@kreata.ee' //same cid value as in the html img src
+      //   }
+      // ]
     };
 
     transport.sendMail(mail, (err, data) => {
