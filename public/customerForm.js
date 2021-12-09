@@ -113,7 +113,7 @@ function GetUrl() {
       newCampOne = strNameOne.toString();
       let identifiedCamp = newCamp.includes(newCampOne);
       if (identifiedCamp) {
-        firstOPtion.textContent = strValueOne;
+        firstOPtion.textContent = strValueOne; //Add slice to cap first letter
         firstOPtion.setAttribute("value", strNameOne)
       }
     }

@@ -11,7 +11,9 @@ router.get('/customer', async function (req, res) {
 });
 
 var transport = nodemailer.createTransport(smtpTransport({
-  service: 'gmail',
+  service: 'gmail', //smtp.mail.madbookings.com
+  secureConnection: false, // TLS requires secureConnection to be false
+  port: 587, // port for secure SMTP
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
@@ -70,7 +72,7 @@ router.post("/customer", (req, res) => {
     insertInfo();
 
     const mail = {
-      from: `Madbookings ${data.email}`,
+      from: `${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
