@@ -11,7 +11,7 @@ router.get('/customer', async function (req, res) {
 });
 
 var transport = nodemailer.createTransport(smtpTransport({
-  service: 'gmail',
+  service: process.env.SERVICE,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
