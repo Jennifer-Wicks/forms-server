@@ -24,6 +24,22 @@ app.route("/").get(function (req, res) {
   res.sendFile(process.cwd() + "/public/index.html");
 });
 
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRETS;
+
+app.post("/recaptcha", function (request, response) {
+  var recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?";
+  recaptcha_url += "secret=" + RECAPTCHA_SECRET + "&";
+  recaptcha_url += "response=" + request.body["g-recaptcha-response"] + "&";
+  recaptcha_url += "remoteip=" + request.socket.remoteAddress;
+  Request(recaptcha_url, function (error, resp, body) {
+    body = JSON.parse(body);
+    if (body.success !== undefined && !body.success) {
+      return response.send({ "message": "Captcha validation failed" });
+    }
+    response.redirect('http://www.nwrnamibia.com')
+  });
+});
+
 // Express server listening...
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
