@@ -36,7 +36,9 @@ app.post("/recaptcha", function (request, response) {
     if (body.success !== undefined && !body.success) {
       return response.send({ "message": "Captcha validation failed" });
     }
-    response.redirect('http://www.nwrnamibia.com')
+    response.status(200).json(body)
+    // res.status(200).json("updated").send(body)
+    // response.redirect('http://www.nwrnamibia.com')
   });
 });
 
