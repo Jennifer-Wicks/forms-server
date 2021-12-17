@@ -76,7 +76,9 @@ router.post("/customer", (req, res) => {
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `${newData.join(' ')}`,
+      html: `${newData.join(' ')}
+        <br />
+        Received from: http://www.aiaisresort.com/`,
       // <br />Embedded image: <img src="./public/cid:kasane-location-map.gif"/> <br />Embedded image: <img src="cid:./public/201040.pdf"/>`,
       // attachments: [
       //   {
