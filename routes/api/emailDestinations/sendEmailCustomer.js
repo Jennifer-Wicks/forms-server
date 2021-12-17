@@ -48,8 +48,10 @@ router.post("/customer", (req, res) => {
     var newData = []
 
     function insertInfo() {
-      var wrongDateArr = data.arriveday1.split("-");
-      var wrongDateDep = data.departday1.split("-");
+      var arriveday = "arriveday";
+      var departday = "departday";
+      var wrongDateArr = data.contains(arriveday).split("-");
+      var wrongDateDep = data.contains(departday).split("-");
       let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
       let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
@@ -106,5 +108,3 @@ router.post("/customer", (req, res) => {
 });
 
 module.exports = router;
-
-
