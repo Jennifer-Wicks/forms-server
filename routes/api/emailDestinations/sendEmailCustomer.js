@@ -12,8 +12,6 @@ router.get('/customer', async function (req, res) {
 
 var transport = nodemailer.createTransport(smtpTransport({
   service: process.env.SERVICE,
-  // secureConnection: false, // TLS requires secureConnection to be false
-  // port: 587, // port for secure SMTP
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
@@ -34,7 +32,7 @@ router.post("/customer", (req, res) => {
   let form = new multiparty.Form();
   let data = {};
   // let fileData = [];
-  form.parse(req, function (err, fields) { //fileList
+  form.parse(req, function (err, fields) {
     // console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
@@ -76,9 +74,7 @@ router.post("/customer", (req, res) => {
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
       subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
-      html: `${newData.join(' ')}
-        <br />
-        Received from: http://www.aiaisresort.com/`,
+      html: `${newData.join(' ')}`,
       // <br />Embedded image: <img src="./public/cid:kasane-location-map.gif"/> <br />Embedded image: <img src="cid:./public/201040.pdf"/>`,
       // attachments: [
       //   {
@@ -106,3 +102,5 @@ router.post("/customer", (req, res) => {
 });
 
 module.exports = router;
+
+
