@@ -73,7 +73,7 @@ router.post("/customer", (req, res) => {
       from: `${data.email}`,
       replyTo: `${data.email}`,
       to: process.env.TOEMAIL, // receiver email,
-      subject: `${data.book === undefined ? data.quote : data.book} ${data.arriveday1} ${data.resort1} \(${data.name} ${data.surname}\)`,
+      subject: `${data.arriveday1} ${data.book === undefined ? data.quote : data.book}  ${data.resort1} \(${data.name} ${data.surname}\)`,
       html: `${newData.join(' ')}`,
       // <br />Embedded image: <img src="./public/cid:kasane-location-map.gif"/> <br />Embedded image: <img src="cid:./public/201040.pdf"/>`,
       // attachments: [
