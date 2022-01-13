@@ -44,8 +44,8 @@ router.post("/supplier", (req, res) => {
     function insertInfo() {
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
-      let changedDateArr = wrongDateArr[2] + " " + arrMonth + " " + wrongDateArr[0];
-      let changedDateDep = wrongDateDep[2] + " " + depMonth + " " + wrongDateDep[0];
+      let changedDateArr = wrongDateArr[2] + " " + wrongDateArr[1] + " " + wrongDateArr[0];
+      let changedDateDep = wrongDateDep[2] + " " + wrongDateArr[1] + " " + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
 
