@@ -87,8 +87,8 @@ router.post("/supplier", (req, res) => {
       }
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
-      let changedDateArr = wrongDateArr[0] + " " + month + " " + wrongDateArr[2];
-      let changedDateDep = wrongDateDep[0] + " " + month + " " + wrongDateDep[2];
+      let changedDateArr = wrongDateArr[2] + " " + month + " " + wrongDateArr[0];
+      let changedDateDep = wrongDateDep[2] + " " + month + " " + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
 
