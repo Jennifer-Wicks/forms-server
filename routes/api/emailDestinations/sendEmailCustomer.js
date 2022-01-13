@@ -31,68 +31,106 @@ transport.verify(function (error, success) {
 router.post("/customer", (req, res) => {
   let form = new multiparty.Form();
   let data = {};
-  // let fileData = [];
   form.parse(req, function (err, fields) {
-    // console.log("fields", fields);
+    console.log("fields", fields);
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
-      // console.log("fileList", fileList.uploadFile);
-
-      // fileData.push(fileList.uploadFile);
     });
-    // console.log("fileData", fileData);
 
     var strName, strValue;
     var newData = []
 
     function insertInfo() {
-      let switchDate = data.arriveday1.slice(5, 7);
-      let month = "";
+      let switchDateArr = data.arriveday1.slice(5, 7);
+      let switchDateDep = data.departday1.slice(5, 7);
+      let arrMonth = "";
+      let depMonth = "";
+
+      switch (switchDateArr) {
+        case "01":
+          arrMonth = "Jan"
+          break;
+        case "02":
+          arrMonth = "Feb";
+          break;
+        case "03":
+          arrMonth = "Mar";
+          break;
+        case "04":
+          arrMonth = "Apr";
+          break;
+        case "05":
+          arrMonth = "May";
+          break;
+        case "06":
+          arrMonth = "Jun";
+          break;
+        case "07":
+          arrMonth = "Jul";
+          break;
+        case "08":
+          arrMonth = "Aug";
+          break;
+        case "09":
+          arrMonth = "Sep";
+          break;
+        case "10":
+          arrMonth = "Oct";
+          break;
+        case "11":
+          arrMonth = "Nov";
+          break;
+        case "12":
+          arrMonth = "Dec";
+          break;
+        default:
+          arrMonth = "Not selected";
+      }
 
       switch (switchDate) {
         case "01":
-          month = "Jan"
+          depMonth = "Jan"
           break;
         case "02":
-          month = "Feb";
+          depMonth = "Feb";
           break;
         case "03":
-          month = "Mar";
+          depMonth = "Mar";
           break;
         case "04":
-          month = "Apr";
+          depMonth = "Apr";
           break;
         case "05":
-          month = "May";
+          depMonth = "May";
           break;
         case "06":
-          month = "Jun";
+          depMonth = "Jun";
           break;
         case "07":
-          month = "Jul";
+          depMonth = "Jul";
           break;
         case "08":
-          month = "Aug";
+          depMonth = "Aug";
           break;
         case "09":
-          month = "Sep";
+          depMonth = "Sep";
           break;
         case "10":
-          month = "Oct";
+          depMonth = "Oct";
           break;
         case "11":
-          month = "Nov";
+          depMonth = "Nov";
           break;
         case "12":
-          month = "Dec";
+          depMonth = "Dec";
           break;
         default:
-          month = "Not selected";
+          depMonth = "Not selected";
       }
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
-      let changedDateArr = wrongDateArr[2] + " " + month + " " + wrongDateArr[0];
-      let changedDateDep = wrongDateDep[2] + " " + month + " " + wrongDateDep[0];
+      let changedDateArr = wrongDateArr[2] + " " + arrMonth + " " + wrongDateArr[0];
+      let changedDateDep = wrongDateDep[2] + " " + depMonth + " " + wrongDateDep[0];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
 
@@ -106,6 +144,9 @@ router.post("/customer", (req, res) => {
         }
         if (strName.slice(0, 4) === "comm") {
           newData.push(`<p>&nbsp;</p>`);
+        }
+        if (strName === "g-recaptcha-response") {
+          null
         }
         newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }
