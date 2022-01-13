@@ -87,7 +87,7 @@ router.post("/customer", (req, res) => {
           arrMonth = "Not selected";
       }
 
-      switch (switchDate) {
+      switch (switchDateDep) {
         case "01":
           depMonth = "Jan"
           break;
