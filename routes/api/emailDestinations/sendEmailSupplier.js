@@ -42,10 +42,53 @@ router.post("/supplier", (req, res) => {
     var newData = []
 
     function insertInfo() {
+      let switchDate = data.arriveday1.slice(5, 7);
+      let month = "";
+
+      switch (switchDate) {
+        case "01":
+          month = "Jan"
+          break;
+        case "02":
+          month = "Feb";
+          break;
+        case "03":
+          month = "Mar";
+          break;
+        case "04":
+          month = "Apr";
+          break;
+        case "05":
+          month = "May";
+          break;
+        case "06":
+          month = "Jun";
+          break;
+        case "07":
+          month = "Jul";
+          break;
+        case "08":
+          month = "Aug";
+          break;
+        case "09":
+          month = "Sep";
+          break;
+        case "10":
+          month = "Oct";
+          break;
+        case "11":
+          month = "Nov";
+          break;
+        case "12":
+          month = "Dec";
+          break;
+        default:
+          month = "Not selected";
+      }
       var wrongDateArr = data.arriveday1.split("-");
       var wrongDateDep = data.departday1.split("-");
-      let changedDateArr = wrongDateArr[2] + "/" + wrongDateArr[1] + "/" + wrongDateArr[0];
-      let changedDateDep = wrongDateDep[2] + "/" + wrongDateDep[1] + "/" + wrongDateDep[0];
+      let changedDateArr = wrongDateArr[0] + " " + month + " " + wrongDateArr[2];
+      let changedDateDep = wrongDateDep[0] + " " + month + " " + wrongDateDep[2];
       data.arriveday1 = changedDateArr;
       data.departday1 = changedDateDep;
 
