@@ -37,17 +37,122 @@ router.post("/supplier", (req, res) => {
     Object.keys(fields).forEach(function (property) {
       data[property] = fields[property].toString();
     });
-    console.log("data", data);
+    // console.log("data", data);
     var strName, strValue;
     var newData = []
 
     function insertInfo() {
-      var wrongDateArr = data.arriveday1.split("-");
-      var wrongDateDep = data.departday1.split("-");
-      let changedDateArr = wrongDateArr[2] + " " + wrongDateArr[1] + " " + wrongDateArr[0];
-      let changedDateDep = wrongDateDep[2] + " " + wrongDateArr[1] + " " + wrongDateDep[0];
-      data.arriveday1 = changedDateArr;
-      data.departday1 = changedDateDep;
+      let switchDateArr = "";
+      let switchDateDep = "";
+
+      for (strName in data) {
+        strValue = data[strName]
+        if (strName.slice(0, 7) === "arrived") {
+          switchDateArr = strValue.slice(5, 7);
+        }
+        if (strName.slice(0, 7) === "departd") {
+          switchDateDep = strValue.slice(5, 7);
+        }
+      }
+
+      let monthArr = "";
+      switch (switchDateArr) {
+        case "01":
+          monthArr = "Jan"
+          break;
+        case "02":
+          monthArr = "Feb";
+          break;
+        case "03":
+          monthArr = "Mar";
+          break;
+        case "04":
+          monthArr = "Apr";
+          break;
+        case "05":
+          monthArr = "May";
+          break;
+        case "06":
+          monthArr = "Jun";
+          break;
+        case "07":
+          monthArr = "Jul";
+          break;
+        case "08":
+          monthArr = "Aug";
+          break;
+        case "09":
+          monthArr = "Sep";
+          break;
+        case "10":
+          monthArr = "Oct";
+          break;
+        case "11":
+          monthArr = "Nov";
+          break;
+        case "12":
+          monthArr = "Dec";
+          break;
+        default:
+          monthArr = "Not selected";
+      }
+
+      let monthDep = "";
+
+      switch (switchDateDep) {
+        case "01":
+          monthDep = "Jan"
+          break;
+        case "02":
+          monthDep = "Feb";
+          break;
+        case "03":
+          monthDep = "Mar";
+          break;
+        case "04":
+          monthDep = "Apr";
+          break;
+        case "05":
+          monthDep = "May";
+          break;
+        case "06":
+          monthDep = "Jun";
+          break;
+        case "07":
+          monthDep = "Jul";
+          break;
+        case "08":
+          monthDep = "Aug";
+          break;
+        case "09":
+          monthDep = "Sep";
+          break;
+        case "10":
+          monthDep = "Oct";
+          break;
+        case "11":
+          monthDep = "Nov";
+          break;
+        case "12":
+          monthDep = "Dec";
+          break;
+        default:
+          monthDep = "Not selected";
+      }
+
+      for (strName in data) {
+        strValue = data[strName]
+        if (strName.slice(0, 4) === "arri") {
+          wrongDateArr = strValue.split("-");
+          let changedDateArr = wrongDateArr[2] + " " + monthArr + " " + wrongDateArr[0];
+          data[strName] = changedDateArr;
+        }
+        if (strName.slice(0, 4) === "depa") {
+          wrongDateDep = strValue.split("-");
+          let changedDateDep = wrongDateDep[2] + " " + monthArr + " " + wrongDateDep[0];
+          data[strName] = changedDateDep;
+        }
+      }
 
       for (strName in data) {
         strValue = data[strName]
@@ -105,7 +210,7 @@ router.post("/supplier", (req, res) => {
         console.log(err);
         res.status(500).send("Something went wrong.");
       } else {
-        res.status(200).send("The email successfully sent to recipient!");
+        res.status(200).send("the email successfully sent to recipient!");
       }
     });
   });
