@@ -6,8 +6,8 @@ const multiparty = require("multiparty");
 const nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
 
-router.get('/customer', async function (req, res) {
-  res.json("Customer form")
+router.get('/supplier', async function (req, res) {
+  res.json("supplier form")
 });
 
 var transport = nodemailer.createTransport(smtpTransport({
@@ -30,7 +30,6 @@ transport.verify(function (error, success) {
 //Send customer booking form to MB
 router.post("/supplier", (req, res) => {
   let formSup = new multiparty.Form();
-  // console.log("formSup", formSup)
   let data = {};
   formSup.parse(req, function (err, fields) {
     // console.log("fields", fields);
