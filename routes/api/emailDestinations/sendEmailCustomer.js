@@ -40,20 +40,117 @@ router.post("/customer", (req, res) => {
     });
 
     function insertInfo() {
+      let switchDateArr = "";
+      let switchDateDep = "";
 
+      for (strName in data) {
+        strValue = data[strName]
+        if (strName.slice(0, 7) === "arrived") {
+          switchDateArr = strValue.slice(5, 7);
+        }
+        if (strName.slice(0, 7) === "departd") {
+          switchDateDep = strValue.slice(5, 7);
+        }
+      }
+
+      let monthArr = "";
+      switch (switchDateArr) {
+        case "01":
+          monthArr = "Jan"
+          break;
+        case "02":
+          monthArr = "Feb";
+          break;
+        case "03":
+          monthArr = "Mar";
+          break;
+        case "04":
+          monthArr = "Apr";
+          break;
+        case "05":
+          monthArr = "May";
+          break;
+        case "06":
+          monthArr = "Jun";
+          break;
+        case "07":
+          monthArr = "Jul";
+          break;
+        case "08":
+          monthArr = "Aug";
+          break;
+        case "09":
+          monthArr = "Sep";
+          break;
+        case "10":
+          monthArr = "Oct";
+          break;
+        case "11":
+          monthArr = "Nov";
+          break;
+        case "12":
+          monthArr = "Dec";
+          break;
+        default:
+          monthArr = "Not selected";
+      }
+
+      let monthDep = "";
+
+      switch (switchDateDep) {
+        case "01":
+          monthDep = "Jan"
+          break;
+        case "02":
+          monthDep = "Feb";
+          break;
+        case "03":
+          monthDep = "Mar";
+          break;
+        case "04":
+          monthDep = "Apr";
+          break;
+        case "05":
+          monthDep = "May";
+          break;
+        case "06":
+          monthDep = "Jun";
+          break;
+        case "07":
+          monthDep = "Jul";
+          break;
+        case "08":
+          monthDep = "Aug";
+          break;
+        case "09":
+          monthDep = "Sep";
+          break;
+        case "10":
+          monthDep = "Oct";
+          break;
+        case "11":
+          monthDep = "Nov";
+          break;
+        case "12":
+          monthDep = "Dec";
+          break;
+        default:
+          monthDep = "Not selected";
+      }
       // amend to update below
-      // for (strName in data) {
-      //   strValue = data[strName]
-      //   const pattern = date.compile('DD MMM YYYY');
-      //   if (strName.slice(0, 4) === "arri") {
-      //     const now = new Date(strValue);
-      //     data[strValue] = date.format(now, pattern);
-      //   }
-      //   if (strName.slice(0, 4) === "depa") {
-      //     const now = new Date(strValue);
-      //     data[strValue] = date.format(now, pattern);
-      //   }
-      // }
+      for (strName in data) {
+        strValue = data[strName]
+        if (strName.slice(0, 4) === "arri") {
+          wrongDateArr = strValue.split("-");
+          let changedDateArr = wrongDateArr[2] + " " + monthArr + " " + wrongDateArr[0];
+          data[strName] = changedDateArr;
+        }
+        if (strName.slice(0, 4) === "depa") {
+          wrongDateDep = strValue.split("-");
+          let changedDateDep = wrongDateDep[2] + " " + monthArr + " " + wrongDateDep[0];
+          data[strName] = changedDateDep;
+        }
+      }
 
       for (strName in data) {
         strValue = data[strName]
@@ -69,7 +166,6 @@ router.post("/customer", (req, res) => {
         newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }
     }
-    console.log("data", newData);
     insertInfo();
     const mail = {
       from: `${data.email}`,
