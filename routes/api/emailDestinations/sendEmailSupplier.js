@@ -47,11 +47,11 @@ router.post("/supplier", (req, res) => {
         const pattern = date.compile('DD MMM YYYY');
         if (strName.slice(0, 4) === "arri") {
           const now = new Date(strValue);
-          data[strName] = pattern;
+          data[strValue] = date.format(now, pattern);
         }
-        if (strName.slice(0, 4) === "depa") {
-          data[strName] = pattern;
-        }
+        // if (strName.slice(0, 4) === "depa") {
+        //   data[strName] = pattern;
+        // }
       }
 
       for (strName in data) {
