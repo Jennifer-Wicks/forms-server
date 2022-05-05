@@ -42,17 +42,18 @@ router.post("/customer", (req, res) => {
     function insertInfo() {
 
       // amend to update below
-      for (strName in data) {
-        strValue = data[strName]
-        const pattern = date.compile('DD MMM YYYY');
-        if (strName.slice(0, 4) === "arri") {
-          const now = new Date(strValue);
-          data[strName] = pattern;
-        }
-        if (strName.slice(0, 4) === "depa") {
-          data[strName] = pattern;
-        }
-      }
+      // for (strName in data) {
+      //   strValue = data[strName]
+      //   const pattern = date.compile('DD MMM YYYY');
+      //   if (strName.slice(0, 4) === "arri") {
+      //     const now = new Date(strValue);
+      //     data[strValue] = date.format(now, pattern);
+      //   }
+      //   if (strName.slice(0, 4) === "depa") {
+      //     const now = new Date(strValue);
+      //     data[strValue] = date.format(now, pattern);
+      //   }
+      // }
 
       for (strName in data) {
         strValue = data[strName]
