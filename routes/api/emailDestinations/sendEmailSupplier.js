@@ -38,134 +38,58 @@ router.post("/supplier", (req, res) => {
       data[property] = fields[property].toString();
     });
     // console.log("data", data);
-    var strName, strValue;
     var newData = []
 
     function insertInfo() {
-      let switchDateArr = "";
-      let switchDateDep = "";
-
-      for (strName in data) {
-        strValue = data[strName]
-        if (strName.slice(0, 7) === "arrived") {
-          switchDateArr = strValue.slice(5, 7);
-        }
-        if (strName.slice(0, 7) === "departd") {
-          switchDateDep = strValue.slice(5, 7);
-        }
-      }
-
-      let monthArr = "";
-      switch (switchDateArr) {
-        case "01":
-          monthArr = "Jan"
-          break;
-        case "02":
-          monthArr = "Feb";
-          break;
-        case "03":
-          monthArr = "Mar";
-          break;
-        case "04":
-          monthArr = "Apr";
-          break;
-        case "05":
-          monthArr = "May";
-          break;
-        case "06":
-          monthArr = "Jun";
-          break;
-        case "07":
-          monthArr = "Jul";
-          break;
-        case "08":
-          monthArr = "Aug";
-          break;
-        case "09":
-          monthArr = "Sep";
-          break;
-        case "10":
-          monthArr = "Oct";
-          break;
-        case "11":
-          monthArr = "Nov";
-          break;
-        case "12":
-          monthArr = "Dec";
-          break;
-        default:
-          monthArr = "Not selected";
-      }
-
-      let monthDep = "";
-
-      switch (switchDateDep) {
-        case "01":
-          monthDep = "Jan"
-          break;
-        case "02":
-          monthDep = "Feb";
-          break;
-        case "03":
-          monthDep = "Mar";
-          break;
-        case "04":
-          monthDep = "Apr";
-          break;
-        case "05":
-          monthDep = "May";
-          break;
-        case "06":
-          monthDep = "Jun";
-          break;
-        case "07":
-          monthDep = "Jul";
-          break;
-        case "08":
-          monthDep = "Aug";
-          break;
-        case "09":
-          monthDep = "Sep";
-          break;
-        case "10":
-          monthDep = "Oct";
-          break;
-        case "11":
-          monthDep = "Nov";
-          break;
-        case "12":
-          monthDep = "Dec";
-          break;
-        default:
-          monthDep = "Not selected";
-      }
       // amend to update below
+      const pattern = date.compile('ddd, DD MMM YYYY');
+
       for (strName in data) {
         strValue = data[strName]
         if (strName.slice(0, 4) === "arri") {
-          wrongDateArr = strValue.split("-");
-          let changedDateArr = wrongDateArr[2] + " " + monthArr + " " + wrongDateArr[0];
-          data[strName] = changedDateArr;
+          const now = new Date(strValue);
+          data[strName] = date.format(now, pattern);
         }
         if (strName.slice(0, 4) === "depa") {
-          wrongDateDep = strValue.split("-");
-          let changedDateDep = wrongDateDep[2] + " " + monthArr + " " + wrongDateDep[0];
-          data[strName] = changedDateDep;
+          const now = new Date(strValue);
+          data[strName] = date.format(now, pattern);
         }
       }
 
       for (strName in data) {
         strValue = data[strName]
-        if (strName.slice(0, 4) === "adul") {
-          newData.push(`<p>&nbsp;</p>`);
+        if (strName.slice(0, 4) === "reso"
+          || strName.slice(0, 4) === "acco"
+          || strName.slice(0, 4) === "arri"
+          || strName.slice(0, 4) === "depa"
+          || strName.slice(0, 4) === "adul"
+          || strName.slice(0, 7) === "childno"
+          || strName.slice(0, 7) === "childha"
+        ) {
+          if (strName.slice(0, 4) === "reso") {
+            strName = "Resort"
+            newData.push(`<p>&nbsp;</p>`);
+          }
+          if (strName.slice(0, 4) === "acco") {
+            strName = "Accommodation Type"
+          }
+          if (strName.slice(0, 4) === "arri") {
+            strName = "Arrival date"
+          }
+          if (strName.slice(0, 4) === "depa") {
+            strName = "Departure Date"
+          }
+          if (strName.slice(0, 4) === "adul") {
+            strName = "Adults"
+          }
+          if (strName.slice(0, 7) === "childno") {
+            strName = "Child (0 - 5) - No Charge"
+          }
+          if (strName.slice(0, 7) === "childha") {
+            strName = "Child (6 - 12) - Paying 50%"
+          }
+          newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
         }
-        if (strName.slice(0, 4) === "reso") {
-          newData.push(`<p>&nbsp;</p>`);
-        }
-        if (strName.slice(0, 4) === "comm") {
-          newData.push(`<p>&nbsp;</p>`);
-        }
-        newData.push(`<p><strong>${strName}:</strong> ${strValue}</p>`);
       }
     }
     insertInfo();
