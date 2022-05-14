@@ -41,7 +41,7 @@ router.post("/customer", (req, res) => {
 
     function insertInfo() {
       // amend to update below
-      const pattern = date.compile('ddd, DD MMM YYYY [GMT]Z');
+      const pattern = date.compile('ddd, DD MMM YYYY');
 
       for (strName in data) {
         strValue = data[strName]
