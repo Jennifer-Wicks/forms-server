@@ -11,7 +11,9 @@ router.get('/raw', async function (req, res) {
 });
 
 var transport = nodemailer.createTransport(smtpTransport({
-  service: process.env.SERVICE,
+  host: "mail.madbookings.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
